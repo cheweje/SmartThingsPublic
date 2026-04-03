@@ -1,0 +1,103 @@
+# =============================================================================
+# RSAF Monitor Configuration
+# =============================================================================
+# This file contains default settings. Environment variables override these.
+# See .env.example for the environment variables you need to set.
+# =============================================================================
+
+# --- Search Settings ---
+search:
+  # Keywords to search for. Add or remove as needed.
+  keywords:
+    - '"Republic of Singapore Air Force"'
+    - '"RSAF Singapore"'
+    - '"RSAF air force"'
+    - '"RSAF" Singapore'
+    - '"Singapore fighter jet" RSAF'
+    - '"RSAF exercise"'
+    - '"RSAF aircraft"'
+    - '"RSAF deployment"'
+    - '"RSAF accident"'
+    - '"RSAF complaint"'
+    - '"RSAF noise"'
+    - '"RSAF training"'
+    - '"RSAF" site:gov.sg'
+    - '"RSAF" site:mindef.gov.sg'
+
+  # Search provider: "duckduckgo" (free), "serpapi", or "google_cse"
+  search_provider: "duckduckgo"
+
+  # Maximum results per search query
+  max_results_per_query: 20
+
+  # Maximum total articles per run
+  max_articles_per_run: 50
+
+  # How far back to look (hours) if no previous run exists
+  lookback_hours: 26
+
+  # Delay between web requests (seconds) — be polite
+  request_delay_seconds: 2.0
+
+  # Whether to respect robots.txt
+  respect_robots_txt: true
+
+  # RSS feeds to monitor
+  rss_feeds:
+    - "https://www.channelnewsasia.com/rssfeeds/8395986"
+    - "https://www.straitstimes.com/news/singapore/rss.xml"
+    - "https://www.janes.com/feeds/news"
+    - "https://www.defensenews.com/arc/outboundfeeds/rss/?outputType=xml"
+    - "https://thediplomat.com/feed/"
+
+  # Sources to prioritise (articles from these rank higher)
+  preferred_sources:
+    - "mindef.gov.sg"
+    - "channelnewsasia.com"
+    - "straitstimes.com"
+    - "todayonline.com"
+    - "mothership.sg"
+    - "janes.com"
+    - "defensenews.com"
+    - "flightglobal.com"
+    - "reuters.com"
+    - "bbc.com"
+
+  # Sources to block (articles from these are skipped entirely)
+  blocked_sources: []
+
+# --- LLM Settings ---
+llm:
+  # Model to use for analysis
+  model: "claude-sonnet-4-20250514"
+
+  # Lower temperature = more deterministic output
+  temperature: 0.2
+
+  # Max tokens per API call
+  max_tokens_per_request: 4096
+
+# --- Email Settings ---
+email:
+  smtp_host: "smtp.gmail.com"
+  smtp_port: 587
+  use_tls: true
+  subject_prefix: "RSAF Daily Web Digest"
+  # smtp_username, smtp_password, sender_email, recipient_email
+  # are set via environment variables for security
+
+# --- General Settings ---
+# Where to store the SQLite database
+db_path: "data/rsaf_monitor.db"
+
+# Where to save generated reports
+output_dir: "reports"
+
+# Where to save log files
+log_dir: "logs"
+
+# Logging level: DEBUG, INFO, WARNING, ERROR
+log_level: "INFO"
+
+# Test mode: shorter lookback window (hours)
+test_lookback_hours: 4
